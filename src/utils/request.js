@@ -11,8 +11,7 @@ service.interceptors.request.use(
         config.headers.icode = 'helloqianduanxunlianying'
         // if (store.getters.token) {
         //     // 如果token存在 注入token
-        console.log(localStorage.getItem('token'))
-        config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+        // config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
         // }
         return config // 必须返回配置
     },

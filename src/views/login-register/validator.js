@@ -13,7 +13,6 @@ export const ValidatorMaxorMin = (type, limtNum, value) => {
 
 
 export const validateConfirmPassword = (value, password) => {
-    console.log(value, password)
     if (value !== password) {
         return 'The two inputs must be consistent'
     }

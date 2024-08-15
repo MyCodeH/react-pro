@@ -1,5 +1,6 @@
 import { loginUser, getProfile, registerUser } from '@/api/sys'
 import md5 from 'md5'
+import { message as Msg } from 'antd'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchLoginAction = createAsyncThunk("fetch/loginAction", async (payload) => {
@@ -34,6 +35,7 @@ const themeSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchLoginAction.fulfilled, (state, { payload }) => {
+            Msg.success('Welcome to the website')
             state.token = payload.token
         })
         builder.addCase(fetchProFileAction.fulfilled, (state, { payload }) => {

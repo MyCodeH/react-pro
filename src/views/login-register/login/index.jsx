@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { Vertify } from '@alex_xu/react-slider-vertify';
 import { Box, Modal } from '@mui/material';
 import { IoClose } from "react-icons/io5";
-import { message as Msg } from 'antd'
+
 
 
 const Login = () => {
@@ -32,8 +32,6 @@ const Login = () => {
 
     useEffect(() => {
         if (token) {
-            dispathch(fetchProFileAction())
-            Msg('Welcome to the website')
             navigate('/')
         }
     }, [token])
