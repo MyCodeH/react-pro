@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+}
+
+.driver-fix-stacking {
+    position: relative;
+}
+
+.driver-navigation-btns {
+    line-height: 0;
+}
+
+.ant-modal {
+    top: 20px;
+}
+
+.ant-modal-body {
+    height: 100%;
+}
+
+.ant-modal-content {
+    height: 95vh;
+    padding: 0 0 !important;
+    border-radius: 0.5rem !important;
+}
+
+.ant-modal-mask {
+    background: #edecec !important;
+}
+
+.ant-modal-close {
+    position: absolute !important;
+    top: -5px !important;
+    right: -160px !important;
+    transform: scale(1.5);
+}
