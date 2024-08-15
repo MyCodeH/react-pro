@@ -27,7 +27,6 @@ const Regiteer = () => {
         if (isResiterStatus) {
             console.log(loginForm)
             dispathch(fetchLoginAction(loginForm))
-            dispathch(fetchProFileAction())
             navigate('/')
         }
     }, [isResiterStatus])
