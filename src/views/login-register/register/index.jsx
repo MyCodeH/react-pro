@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom/dist';
 import { fetchLoginAction, fetchProFileAction, fetchRegisterAction } from '@/store/features/userSlice';
 import { ValidatorMaxorMin, validateConfirmPassword } from '../validator';
+import { message as Msg } from 'antd'
 import { message } from 'antd';
 import { useEffect } from 'react';
 const Regiteer = () => {
@@ -25,8 +26,8 @@ const Regiteer = () => {
     }
     useEffect(() => {
         if (isResiterStatus) {
-            console.log(loginForm)
             dispathch(fetchLoginAction(loginForm))
+            Msg('Welcome to the website')
             navigate('/')
         }
     }, [isResiterStatus])

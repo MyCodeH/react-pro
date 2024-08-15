@@ -1,4 +1,3 @@
-import Button from '@/components/button';
 import React from 'react'
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
@@ -7,10 +6,11 @@ import { fetchLoginAction, fetchProFileAction } from '@/store/features/userSlice
 import { useDispatch, useSelector } from 'react-redux';
 import { ValidatorMaxorMin } from '../validator';
 import { useEffect } from 'react';
-import { message } from 'antd';
 import { Vertify } from '@alex_xu/react-slider-vertify';
 import { Box, Modal } from '@mui/material';
 import { IoClose } from "react-icons/io5";
+import { message as Msg } from 'antd'
+
 
 const Login = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -33,6 +33,7 @@ const Login = () => {
     useEffect(() => {
         if (token) {
             dispathch(fetchProFileAction())
+            Msg('Welcome to the website')
             navigate('/')
         }
     }, [token])
