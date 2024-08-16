@@ -1,7 +1,7 @@
 import SvgIcon from "@/components/icons-svg"
 import { useRef, useState, useEffect } from "react"
 import { useIntersectionObserver } from "@reactuses/core"
-const WaterfallWrap = ({ loading, isFinished, onLoad, children }) => {
+const WaterfallWrap = ({ loading, isFinished, query, onLoad, children }) => {
     const laodingTarget = useRef(null)
     const [entry, setEntry] = useState([]);
     const [isLoad, setIsLoad] = useState(false)
@@ -29,7 +29,7 @@ const WaterfallWrap = ({ loading, isFinished, onLoad, children }) => {
     useEffect(() => {
         if (isLoad) {
             if (entry[0]?.boundingClientRect?.top > 200) {
-                onLoad()
+                onLoad({ page: (query.page += 1) })
             }
         }
     }, [isLoad])

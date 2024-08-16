@@ -62,7 +62,7 @@ const Regiteer = () => {
                     {errors.password && (<p className='text-red-600 text-[0.35rem] mt-0.5 text-left'>{errors.password.message}</p>)}
                     <input
                         className="dark:bg-zinc-800 text-[0.42rem] dark:text-zinc-400 border-b-zinc-400 border-b-[1px] w-full outline-0 pb-1 px-1 focus:border-b-text-red-600 dark:focus:border-b-zinc-200 xl:dark:bg-zinc-900"
-                        name="confirmPassword" type="password" placeholder="confirmPassword" autoComplete="on"
+                        name="confirmPassword" type="password" placeholder="ConfirmPassword" autoComplete="on"
                         {...register("confirmPassword", { required: 'confirmPassword is required', validate: () => validateConfirmPassword(watch('password'), watch('confirmPassword')) })}
                     />
                     {errors.confirmPassword && (<p className='text-red-600 text-[0.35rem] mt-0.5 text-left'>{errors.confirmPassword.message}</p>)}

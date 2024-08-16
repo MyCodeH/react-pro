@@ -13,11 +13,12 @@ import {
 import CardItem from "./cardItem"
 import PinsModal from '@/components/pinsModal'
 import { Modal } from "antd"
-const WaterfallView = () => {
+const WaterfallView = ({ containerTarget }) => {
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(false)
     const [isFinished, setIsFinished] = useState(false)
-    const { currentCategory } = useSelector((state) => state.category, shallowEqual)
+    const { currentCategory, } = useSelector((state) => state.category)
+    const { searchText: searchContent } = useSelector((state) => state.search)
     const [query, setQuery] = useState({
         page: 1,
         size: 20,
@@ -26,8 +27,10 @@ const WaterfallView = () => {
     })
 
     useEffect(() => {
-        fetchList({ ...query, categoryId: currentCategory.id })
-    }, [currentCategory.id])
+        containerTarget.current.scrollTop = 0
+        setQuery({ ...query, page: 1, size: 20, categoryId: currentCategory.id, searchText: searchContent })
+        fetchList({ ...query, page: 1, size: 20, categoryId: currentCategory.id, searchText: searchContent })
+    }, [currentCategory.id, searchContent])
 
     const [isVisiblePins, setIsVisiblePins] = useState(false)
     const [curCardItem, setCurCardItem] = useState({})
@@ -55,13 +58,13 @@ const WaterfallView = () => {
         }
         setLoading(false)
     }
-    const handleDownLoad = () => {
+    const handleDownLoad = (page) => {
         setLoading(true);
-        setQuery({ ...query, page: query.page += 1 });
+        setQuery({ ...query, page });
         fetchList(query)
     }
     return <>
-        <WaterfallWrap loading={loading} isFinished={isFinished} onLoad={handleDownLoad}>
+        <WaterfallWrap loading={loading} isFinished={isFinished} query={query} onLoad={({ page }) => handleDownLoad(page)}>
             <WaterfallList data={list} picturePreReading={false} className="w-full px-1" onCollectDataFn={currentCardItemData}>
             </WaterfallList>
         </WaterfallWrap>
@@ -228,6 +231,7 @@ const WaterfallList = ({ data, column = 5, columnSpacing = 20, rowSpacing = 20, 
             }
         }
     }, [data])
+
     const handleCardClick = (data) => {
         onCollectDataFn(data)
     }

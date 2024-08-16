@@ -6,9 +6,13 @@ import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { logout } from '@/store/features/userSlice'
 import Avatar from '@/assets/images/avatar.jpg'
+import { useForm } from "react-hook-form"
+import { setSearchTextFn } from "@/store/features/searchSlice"
 const Header = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
     // 点击返回首页
     const { token } = useSelector(state => state.user)
     const handleToHome = () => {
@@ -29,6 +33,12 @@ const Header = () => {
     const handleLogout = () => {
         dispatch(logout())
     }
+    const onSearchHandlder = (Event) => {
+        if (Event.key == 'Enter') {
+            let searchText = watch('searchText')
+            dispatch(setSearchTextFn(searchText))
+        }
+    }
     return (
         <div className="w-full duration-500 bg-white dark:bg-zinc-800 border-b border-b-zinc-200 dark:border-b-zinc-700 px-2 py-1 h-header">
             <div className="flex items-center">
@@ -43,7 +53,7 @@ const Header = () => {
                             <div className="w-1.5 h-1.5 absolute translate-y-[-50%] top-[50%] left-2">
                                 <SvgIcon name="search" color="#707070" size={15} />
                             </div>
-                            <input style={{ fontSize: '0.35rem' }} className="block w-full h-[44px] pl-4 outline-0 bg-zinc-100 dark:bg-zinc-800 caret-zinc-400 rounded-xl text-zinc-900 dark:text-zinc-200 tracking-wide font-semibold border border-zinc-100 dark:border-zinc-700 duration-500 hover:bg-white dark:group-hover:bg-zinc-900 group-hover:border-zinc-200 dark:group-hover:border-zinc-700 focus:border-red-300 " placeholder="搜索" />
+                            <input style={{ fontSize: '0.35rem' }}  {...register("searchText")} onKeyDown={onSearchHandlder} className="block w-full h-[44px] pl-4 outline-0 bg-zinc-100 dark:bg-zinc-800 caret-zinc-400 rounded-xl text-zinc-900 dark:text-zinc-200 tracking-wide font-semibold border border-zinc-100 dark:border-zinc-700 duration-500 hover:bg-white dark:group-hover:bg-zinc-900 group-hover:border-zinc-200 dark:group-hover:border-zinc-700 focus:border-red-300 " placeholder="搜索" />
                             <div
                                 className="opacity-0 h-1.5 w-[1px] absolute translate-y-[-50%] top-[50%] right-[62px] duration-500 bg-zinc-200 group-hover:opacity-100">
                             </div>
@@ -56,10 +66,10 @@ const Header = () => {
                 <div className="flex items-center mr-1">
                     <ButtonTheme className="mr-1" />
                 </div>
-                <div className="guide-my relative group" >
+                <div className="guide-my relative group1" >
                     <Button icon="profile" iconColor="#fff" onHandleClick={goLogin} />
                     {
-                        (token) && <div className='hidden opacity-0 absolute -left-[3.75rem]  z-20 group-hover:opacity-100 xl:block'>
+                        (token) && <div className='absolute -left-[3.75rem]  z-20 group1-child'>
                             <div
                                 className=' p-1 dark:bg-zinc-900 border rounded-md dark:border-zinc-700'
                             ><div className="w-[140px] overflow-hidden"

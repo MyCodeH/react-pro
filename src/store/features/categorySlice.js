@@ -12,12 +12,13 @@ const categorySlice = createSlice({
     initialState: {
         categorys: CATEGORY_NOMAR_DATA, // 全部类别
         loading: false,
-        currentCategory: ALL_CATEGORY_ITEM // 当前选中tag
+        currentCategory: ALL_CATEGORY_ITEM // 当前选中tag1
     },
     reducers: {
         changeCurrentCategory: (state, { payload }) => {
             return { ...state, currentCategory: { ...state.currentCategory, ...payload } }
-        }
+        },
+
     },
     extraReducers: (builder) => {
         builder.addCase(fetchCategoryAction.pending, (state) => {

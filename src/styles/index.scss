@@ -38,3 +38,11 @@
     right: -160px !important;
     transform: scale(1.5);
 }
+
+.group1-child {
+    display: none;
+}
+
+.group1:hover .group1-child {
+    display: block;
+}

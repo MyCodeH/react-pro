@@ -6,10 +6,12 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storageLocation from 'redux-persist/lib/storage'; //存储到localStorage
 import userReducer from './features/userSlice'
 import fullScrrentReducer from './features/fullScreenSlice'
+import searchReducer from './features/searchSlice'
 
 const persistConfig = {
     key: 'rootConf',
-    storage: storageLocation,  //指定存储到session中
+    storage: storageLocation,  //指定存储到Location中
+    blacklist: ['search'] // 排除缓存key
 }
 
 const persistedReducer = persistReducer(
@@ -19,6 +21,7 @@ const persistedReducer = persistReducer(
         category: categoryReducer, // 类别状态管理
         sysTheme: sysThemeReducer, // 主题状态管理
         user: userReducer, // 用户数据管理
+        search: searchReducer,
         fullScreen: fullScrrentReducer // 控制全屏管理
     })
 )
